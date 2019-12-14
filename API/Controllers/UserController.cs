@@ -64,19 +64,21 @@ namespace API.Controllers
 
             try
             {
-                var user = await dbContext.Users.FirstOrDefaultAsync(u => u.Email.Equals(loginData.Username));
+                var user = await dbContext.Users
+                    .Include(u => u.ProfilePicture)
+                    .FirstOrDefaultAsync(u => u.Email.Equals(loginData.Username));
                 if(user == null)
                 {
-                    return Json(OperationActionResult.Failed<ApplicationUserDTO>("InvalidUserNamePassword"));
+                    return Json(OperationActionResult.Failed<RegisterUserDTO>("InvalidUserNamePassword"));
                 }
                 var res = userService.CheckPassword(user, loginData.Password);
 
                 if(!res.Status)
                 {
-                    return Json(OperationActionResult.Failed<ApplicationUserDTO>("InvalidUserNamePassword"));
+                    return Json(OperationActionResult.Failed<RegisterUserDTO>("InvalidUserNamePassword"));
                 }
 
-                return Json(OperationActionResult.Success(new ApplicationUserDTO
+                return Json(OperationActionResult.Success(new RegisterUserDTO
                 {
                     Id = user.Id,
                     Email = user.Email,
@@ -90,5 +92,40 @@ namespace API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
+
+        [HttpGet("user")]
+        public async Task<IActionResult> GetUser ([FromQuery] Guid userId)
+        {
+            if(userId == Guid.Empty)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                var user = await dbContext.Users
+                    .Include(u => u.ProfilePicture)
+                    .FirstOrDefaultAsync(u => u.Id == userId);
+                if(user == null)
+                {
+                    return Json(OperationActionResult.Failed<RegisterUserDTO>("UserNotFound"));
+                }
+
+                return Json(OperationActionResult.Success(new RegisterUserDTO
+                {
+                    Id = user.Id,
+                    Email = user.Email,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    PhoneNumber = user.PhoneNumber
+                }));
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
     }
 }

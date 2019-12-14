@@ -1,7 +1,7 @@
 ﻿using System;
 namespace API.DTOs
 {
-    public class ApplicationUserDTO
+    public class RegisterUserDTO
     {
         /// <summary>
         /// Identifier
