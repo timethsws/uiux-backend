@@ -53,7 +53,14 @@ namespace Core.Services
                     LastName = userModel.LastName,
                     Email = userModel.Email,
                     PhoneNumber = userModel.PhoneNumber,
-                    PasswordHash = Encoding.UTF8.GetString(MySHA256.ComputeHash(Encoding.UTF8.GetBytes(userModel.Password + "MySecret")))
+                    PasswordHash = Encoding.UTF8.GetString(MySHA256.ComputeHash(Encoding.UTF8.GetBytes(userModel.Password + "MySecret"))),
+                    Gender = userModel.gender,
+                    ProfilePicture = new Image
+                    {
+                        Id = Guid.NewGuid(),
+                        Url = userModel.gender == Gender.Male ? "http://localhost:5000/images/profile_m.png" : "http://localhost:5000/images/profile_f.png"
+                    }
+                    
                 };
 
                 dbContext.Users.Add(user);

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace Core.Entities
 {
     /// <summary>
@@ -14,17 +16,19 @@ namespace Core.Entities
         /// <summary>
         /// Name of the place
         /// </summary>
-        public String Name { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Description for the place
         /// </summary>
-        public String Description { get; set; }
+        public string LongDescription { get; set; }
 
         /// <summary>
         /// Main Image
         /// </summary>
-        public String Image { get; set; }
-
+        public Guid ImageId { get; set; }
+        public Image Image { get; set; }
     }
+
+
 }

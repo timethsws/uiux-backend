@@ -13,5 +13,11 @@ namespace Core.Database
         }
 
         public DbSet<ApplicationUser> Users { get; set; }
+        public DbSet<Place> Places { get; set; }
+        public DbSet<Review> Reviews { get; set; }
+        public DbSet<Image> Images { get; set; }
+        public DbSet<FavouritePlace> Favourits { get; set; }
+        public DbSet<ReviewLike> ReviewLikes { get; set; }
+        public DbSet<CommentLike> CommentLikes { get; set; }
     }
 }

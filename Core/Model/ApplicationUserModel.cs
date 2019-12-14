@@ -1,4 +1,7 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using Core.Entities;
+
 namespace Core.Model
 {
     public class ApplicationUserModel
@@ -12,6 +15,8 @@ namespace Core.Model
         /// First Name
         /// </summary>
         public String FirstName { get; set; }
+
+        public Gender gender { get; set; }
 
         /// <summary>
         /// Last Name
@@ -32,5 +37,10 @@ namespace Core.Model
         /// PhoneNumber
         /// </summary>
         public String PhoneNumber { get; set; }
+
+        /// <summary>
+        /// Profile picture as base64string
+        /// </summary>
+        public String ProfilePicture { get; set; }
     }
 }

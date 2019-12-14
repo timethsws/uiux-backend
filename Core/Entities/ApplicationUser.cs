@@ -42,5 +42,19 @@ namespace Core.Entities
         /// </summary>
         public String PhoneNumber { get; set; }
 
+        /// <summary>
+        /// Profile Image
+        /// </summary>
+        public Guid ProfilePictureId { get; set; }
+        public Image ProfilePicture { get; set; }
+
+        public Gender Gender { get; set; }
+
+    }
+
+    public enum Gender
+    {
+        Male = 0,
+        Female = 1
     }
 }

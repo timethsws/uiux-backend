@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Core.Enums;
 
 namespace Core.Entities
@@ -9,6 +10,11 @@ namespace Core.Entities
         /// Identification
         /// </summary>
         public Guid Id { get; set; }
+
+        /// <summary>
+        /// Review Title
+        /// </summary>
+        public string Title { get; set; }
 
         /// <summary>
         /// Review Data
@@ -29,11 +35,18 @@ namespace Core.Entities
         /// The person who added the review
         /// </summary>
         public Guid ReviewerId { get; set; }
-        public Guid Reviewer { get; set; }
+        public ApplicationUser Reviewer { get; set; }
 
         /// <summary>
         /// Image (Base64 String)
         /// </summary>
-        public String Image { get; set; }
+        public Image Image { get; set; }
+
+        public Place Place { get; set; }
+        public Guid PlaceId { get; set; }
+
+        public virtual List<ReviewLike> Likes { get; set; }
+        public virtual List<Comment> Comments { get; set; }
+
     }
 }
