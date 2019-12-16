@@ -186,6 +186,35 @@ namespace Core.Database
                 dbContext.SaveChanges();
             }
 
+            var trainStations = new List<TrainStation>{
+                new TrainStation{
+                    Id = Guid.Parse("1aca7407-dee9-4ffb-9bf8-5bf9e2923bee"),
+                    StationName = "Station 1",
+                    StationCode ="Code1"
+                },
+                new TrainStation{
+                    Id = Guid.Parse("742357d6-5036-4bc5-97ce-7f93ecc762b7"),
+                    StationName = "Station 2",
+                    StationCode ="Code2"
+                },
+                new TrainStation{
+                    Id = Guid.Parse("10218c84-ef73-422f-9f6c-21c6e062f0e0"),
+                    StationName = "Station 3",
+                    StationCode ="Code3"
+                },
+                new TrainStation{
+                    Id = Guid.Parse("d17bdf85-0a49-436b-b4bb-efe07edca99c"),
+                    StationName = "Station 4",
+                    StationCode ="Code4"
+                }
+            };
+
+            if(!dbContext.Stations.Any()){
+                dbContext.Stations.AddRange(trainStations);
+                dbContext.SaveChanges();
+            }
+
+
         }
     }
 }

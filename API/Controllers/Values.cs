@@ -18,13 +18,13 @@ namespace API.Controllers
     public class ValuesController : Controller
     {
         private readonly AppDbContext dbContext;
-        public ValuesController (AppDbContext dbContext)
+        public ValuesController(AppDbContext dbContext)
         {
             this.dbContext = dbContext;
         }
 
         [HttpGet("seedDb")]
-        public bool SeedDb ()
+        public bool SeedDb()
         {
             try
             {
@@ -37,5 +37,17 @@ namespace API.Controllers
                 return false;
             }
         }
+
+        [HttpGet("trainStation")]
+        public async Task<IActionResult> getStations()
+        {
+            return Json(dbContext.Stations.ToList());
+        }
+
     }
+
+
+
+
+
 }
