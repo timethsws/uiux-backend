@@ -28,7 +28,7 @@ namespace Core.Database
                     ProfilePicture = new Image
                     {
                         Id = Guid.NewGuid(),
-                        Url = "http://localhost:5000/images/profile_m.png"
+                        Url = "/images/profile_m.png"
                     },
                     Gender = Gender.Male,
                     PasswordHash = Encoding.UTF8.GetString(MySHA256.ComputeHash(Encoding.UTF8.GetBytes("Qwerty1@" + "MySecret"))),
@@ -43,7 +43,7 @@ namespace Core.Database
                     ProfilePicture = new Image
                     {
                         Id = Guid.NewGuid(),
-                        Url = "http://localhost:5000/images/profile_m.png"
+                        Url = "/images/profile_m.png"
                     },
                     Gender = Gender.Female,
                     PasswordHash = Encoding.UTF8.GetString(MySHA256.ComputeHash(Encoding.UTF8.GetBytes("Qwerty1@" + "MySecret"))),

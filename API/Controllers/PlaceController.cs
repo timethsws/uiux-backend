@@ -41,7 +41,7 @@ namespace API.Controllers
                 MainImage = place.Image.Url,
                 Name = place.Name,
                 Description = place.LongDescription,
-                Liked = dbContext.Favourits.Any(f => f.PlaceId == placeId && f.UserId == userId)
+                //Liked = dbContext.Favourits?.Any(f => f.PlaceId == placeId && f.UserId == userId) ?? false
             };
 
             var images = await dbContext.Reviews.Include(r => r.Image).Where(r => r.PlaceId == placeId).Select(e => e.Image.Url).ToListAsync();
@@ -52,9 +52,9 @@ namespace API.Controllers
         }
 
         [HttpGet("{placeId}/reviews/{userId}")]
-        public async Task<IActionResult> getReviews([FromRoute] Guid PlaceId, [FromRoute] Guid userId)
+        public async Task<IActionResult> getReviews([FromRoute] Guid placeId, [FromRoute] Guid userId)
         {
-            if (!dbContext.Places.Any(p => p.Id == PlaceId))
+            if (!dbContext.Places.Any(p => p.Id == placeId))
             {
                 return StatusCode(StatusCodes.Status404NotFound, "Invalid Place Id");
             }
@@ -62,7 +62,7 @@ namespace API.Controllers
             var reviews = await dbContext.Reviews
                 .Include(r => r.Image)
                 .Include(r => r.Reviewer).ThenInclude(p => p.ProfilePicture)
-                .Where(p => p.PlaceId == PlaceId)
+                .Where(p => p.PlaceId == placeId)
                 .ToListAsync();
 
             List<ReviewDTO> reviewsList = new List<ReviewDTO>();
@@ -81,9 +81,9 @@ namespace API.Controllers
                         Name = r.Reviewer.FirstName + " " + r.Reviewer.LastName,
                         ProfileImage = r.Reviewer.ProfilePicture.Url
                     },
-                    CommentCount = r.Comments.Count(),
-                    LikesCount = r.Likes.Count(),
-                    Liked = r.Likes.Any(l => l.UserId == userId)
+                    CommentCount = r.Comments?.Count() ?? 0,
+                    LikesCount = r.Likes?.Count()?? 0,
+                    Liked = r.Likes?.Any(l => l.UserId == userId) ?? false
                     // TODO Others
                 };
 
@@ -93,8 +93,8 @@ namespace API.Controllers
             return Json(reviewsList);
         }
 
-        [HttpPost("{placeId}/review")]
-        public async Task<IActionResult> AddReview([FromBody]AddReviewModel addReview,[FromForm] List<IFormFile> files)
+        [HttpPost("review")]
+        public async Task<IActionResult> AddReview([FromForm]AddReviewModel addReview)
         {
             if(addReview == null ||
                 addReview.UserId == Guid.Empty ||

@@ -32,6 +32,7 @@ namespace API
                 builder =>
                 {
                     builder.WithOrigins("http://localhost:3000").AllowAnyHeader().AllowAnyMethod();
+                    builder.WithOrigins("http://192.168.1.3:3000").AllowAnyHeader().AllowAnyMethod();
                 });
             });
             services.AddDbContext<AppDbContext>(options => options.UseSqlite("Data Source=app.db",b => b.MigrationsAssembly("API")));

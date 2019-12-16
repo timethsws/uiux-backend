@@ -1,5 +1,6 @@
 ﻿using System;
 using Core.Enums;
+using Microsoft.AspNetCore.Http;
 
 namespace Core.Model
 {
@@ -14,5 +15,7 @@ namespace Core.Model
         public string Content { get; set; }
 
         public Rating Rating { get; set; }
+
+        public IFormFile File { get; set; }
     }
 }
