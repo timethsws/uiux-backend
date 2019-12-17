@@ -211,6 +211,38 @@ namespace API.Migrations
                     b.ToTable("ReviewLikes");
                 });
 
+            modelBuilder.Entity("Core.Entities.Train", b =>
+                {
+                    b.Property<Guid>("TrainId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("AriveTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("ClassAPrice")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ClassBPrice")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ClassCPrice")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("DepartureTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("TrainCode")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("TrainName")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("TrainId");
+
+                    b.ToTable("Trains");
+                });
+
             modelBuilder.Entity("Core.Entities.TrainStation", b =>
                 {
                     b.Property<Guid>("Id")

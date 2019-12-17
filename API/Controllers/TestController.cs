@@ -27,6 +27,5 @@ namespace API.Controllers
             return Json(dbContext.Users.ToList());
         }
 
-
     }
 }

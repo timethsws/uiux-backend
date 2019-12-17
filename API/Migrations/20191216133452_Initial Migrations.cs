@@ -33,6 +33,24 @@ namespace API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Trains",
+                columns: table => new
+                {
+                    TrainId = table.Column<Guid>(nullable: false),
+                    TrainName = table.Column<string>(nullable: true),
+                    TrainCode = table.Column<string>(nullable: true),
+                    DepartureTime = table.Column<DateTime>(nullable: false),
+                    AriveTime = table.Column<DateTime>(nullable: false),
+                    ClassAPrice = table.Column<int>(nullable: false),
+                    ClassBPrice = table.Column<int>(nullable: false),
+                    ClassCPrice = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Trains", x => x.TrainId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Places",
                 columns: table => new
                 {
@@ -292,6 +310,9 @@ namespace API.Migrations
 
             migrationBuilder.DropTable(
                 name: "Stations");
+
+            migrationBuilder.DropTable(
+                name: "Trains");
 
             migrationBuilder.DropTable(
                 name: "Comment");
