@@ -43,6 +43,27 @@ namespace API.Migrations
                     b.ToTable("Answers");
                 });
 
+            modelBuilder.Entity("Core.Entities.AnswerLike", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("AnswerId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AnswerId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AnswerLikes");
+                });
+
             modelBuilder.Entity("Core.Entities.ApplicationUser", b =>
                 {
                     b.Property<Guid>("Id")
@@ -305,6 +326,21 @@ namespace API.Migrations
                     b.HasOne("Core.Entities.Question", "Question")
                         .WithMany("Answers")
                         .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Core.Entities.AnswerLike", b =>
+                {
+                    b.HasOne("Core.Entities.Answer", "Answer")
+                        .WithMany("Likes")
+                        .HasForeignKey("AnswerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

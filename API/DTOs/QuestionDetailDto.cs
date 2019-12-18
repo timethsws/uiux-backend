@@ -1,9 +1,7 @@
 ﻿using System;
-using Core.Entities;
-
 namespace API.DTOs
 {
-    public class QuestionDTO
+    public class QuestionDetailDTO
     {
         public Guid Id { get; set; }
 
@@ -13,9 +11,7 @@ namespace API.DTOs
 
         public DateTime CreatedOn { get; set; }
 
-        public AnswerDTO Answer { get; set; }
-
-        public int LikesCount {get;set;}
+        public int LikesCount { get; set; }
 
         public int AnswerCount { get; set; }
 

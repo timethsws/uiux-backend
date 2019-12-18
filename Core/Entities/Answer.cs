@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace Core.Entities
 {
     public class Answer
@@ -14,5 +16,7 @@ namespace Core.Entities
         public string Content { get; set; }
 
         public DateTime CreatedOn { get; set; }
+
+        public List<AnswerLike> Likes { get; set; }
     }
 }
