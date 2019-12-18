@@ -25,5 +25,7 @@ namespace Core.Database
         public DbSet<ReviewLike> ReviewLikes { get; set; }
         public DbSet<CommentLike> CommentLikes { get; set; }
         public DbSet<TrainStation> Stations { get; set; } 
+
+        public DbSet<TrainStation> Trains {get;set;}
     }
 }
