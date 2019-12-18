@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 using API.DTOs;
 using Core.Database;
@@ -17,7 +14,7 @@ using Web.DTOs;
 
 namespace API.Controllers
 {
-    [Route("api/user")]
+    [Route("api/users")]
     public class UserController : Controller
     {
         private readonly UserService userService;
@@ -69,22 +66,22 @@ namespace API.Controllers
                     .FirstOrDefaultAsync(u => u.Email.Equals(loginData.Username));
                 if(user == null)
                 {
-                    return Json(OperationActionResult.Failed<RegisterUserDTO>("InvalidUserNamePassword"));
+                    return BadRequest("InvalidUserNamePassword");
                 }
+
                 var res = userService.CheckPassword(user, loginData.Password);
 
                 if(!res.Status)
                 {
-                    return Json(OperationActionResult.Failed<RegisterUserDTO>("InvalidUserNamePassword"));
+                    return BadRequest("InvalidUserNamePassword");
                 }
 
-                return Json(OperationActionResult.Success(new RegisterUserDTO
+                return Json(OperationActionResult.Success(new ApplicationUserDTO
                 {
                     Id = user.Id,
                     Email = user.Email,
-                    FirstName = user.FirstName,
-                    LastName = user.LastName,
-                    PhoneNumber = user.PhoneNumber
+                    UserName = user.UserName,
+                    ProfileImage = user.ProfilePicture.Url
                 }));
             }
             catch(Exception ex)
@@ -93,7 +90,7 @@ namespace API.Controllers
             }
         }
 
-        [HttpGet("user")]
+        [HttpGet("{userId}")]
         public async Task<IActionResult> GetUser ([FromQuery] Guid userId)
         {
             if(userId == Guid.Empty)
@@ -108,16 +105,14 @@ namespace API.Controllers
                     .FirstOrDefaultAsync(u => u.Id == userId);
                 if(user == null)
                 {
-                    return Json(OperationActionResult.Failed<RegisterUserDTO>("UserNotFound"));
+                    return Json(OperationActionResult.Failed<ApplicationUserDTO>("UserNotFound"));
                 }
 
-                return Json(OperationActionResult.Success(new RegisterUserDTO
+                return Json(OperationActionResult.Success(new ApplicationUserDTO
                 {
                     Id = user.Id,
                     Email = user.Email,
-                    FirstName = user.FirstName,
-                    LastName = user.LastName,
-                    PhoneNumber = user.PhoneNumber
+                    UserName = user.UserName
                 }));
 
             }
@@ -126,6 +121,5 @@ namespace API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
-
     }
 }

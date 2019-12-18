@@ -20,6 +20,8 @@ namespace API.DTOs
 
         public int CommentCount { get; set; }
 
+        public DateTime ReviewedOn { get; set; }
+
         public List<CommentDTO> Comments { get; set; }
 
         public bool Liked { get; set; }

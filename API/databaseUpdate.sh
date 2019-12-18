@@ -1,5 +1,5 @@
 # update the database
 dotnet ef database drop
-dotnet ef migrations remove
+rm -r Migrations
 dotnet ef migrations add "Initial Migration"
 dotnet ef database update

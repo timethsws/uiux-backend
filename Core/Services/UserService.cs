@@ -33,7 +33,7 @@ namespace Core.Services
                 return OperationOutput<ApplicationUser>.Failed("Arguments Null");
             }
 
-            if(String.IsNullOrWhiteSpace(userModel.Email) || String.IsNullOrWhiteSpace(userModel.FirstName) || String.IsNullOrWhiteSpace(userModel.LastName))
+            if(String.IsNullOrWhiteSpace(userModel.Email) || String.IsNullOrWhiteSpace(userModel.UserName))
             {
                 return OperationOutput<ApplicationUser>.Failed("Arguments Invalid");
             }
@@ -49,16 +49,14 @@ namespace Core.Services
                 var user = new ApplicationUser
                 {
                     Id = Guid.NewGuid(),
-                    FirstName = userModel.FirstName,
-                    LastName = userModel.LastName,
+                    UserName = userModel.UserName,
                     Email = userModel.Email,
-                    PhoneNumber = userModel.PhoneNumber,
                     PasswordHash = Encoding.UTF8.GetString(MySHA256.ComputeHash(Encoding.UTF8.GetBytes(userModel.Password + "MySecret"))),
-                    Gender = userModel.gender,
+                    Gender = userModel.Gender,
                     ProfilePicture = new Image
                     {
                         Id = Guid.NewGuid(),
-                        Url = userModel.gender == Gender.Male ? "http://localhost:5000/images/profile_m.png" : "http://localhost:5000/images/profile_f.png"
+                        Url = userModel.Gender == Gender.Male ? "/images/profile_m.png" : "/images/profile_f.png"
                     }
                     
                 };

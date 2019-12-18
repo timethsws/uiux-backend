@@ -14,14 +14,12 @@ namespace Core.Model
         /// <summary>
         /// First Name
         /// </summary>
-        public String FirstName { get; set; }
-
-        public Gender gender { get; set; }
+        public String UserName { get; set; }
 
         /// <summary>
-        /// Last Name
+        /// Gender
         /// </summary>
-        public String LastName { get; set; }
+        public Gender Gender { get; set; }
 
         /// <summary>
         /// Email

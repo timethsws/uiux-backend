@@ -20,13 +20,7 @@ namespace Core.Entities
         /// <summary>
         /// First Name
         /// </summary>
-        public String FirstName { get; set; }
-
-        /// <summary>
-        /// Last Name
-        /// </summary>
-        public String LastName { get; set; }
-
+        public string UserName { get; set; }
         /// <summary>
         /// Email
         /// </summary>
@@ -36,11 +30,6 @@ namespace Core.Entities
         /// PasswordHash
         /// </summary>
         public String PasswordHash { get; set; }
-
-        /// <summary>
-        /// PhoneNumber
-        /// </summary>
-        public String PhoneNumber { get; set; }
 
         /// <summary>
         /// Profile Image
@@ -55,6 +44,7 @@ namespace Core.Entities
     public enum Gender
     {
         Male = 0,
-        Female = 1
+        Female = 1,
+        Other = 2
     }
 }
