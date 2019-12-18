@@ -9,14 +9,41 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20191216133452_Initial Migrations")]
-    partial class InitialMigrations
+    [Migration("20191218023321_Initial Migration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.0.0");
+
+            modelBuilder.Entity("Core.Entities.Answer", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("QuestionId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("QuestionId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Answers");
+                });
 
             modelBuilder.Entity("Core.Entities.ApplicationUser", b =>
                 {
@@ -27,22 +54,16 @@ namespace API.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("FirstName")
-                        .HasColumnType("TEXT");
-
                     b.Property<int>("Gender")
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("TEXT");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("PhoneNumber")
+                    b.Property<Guid>("ProfilePictureId")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("ProfilePictureId")
+                    b.Property<string>("UserName")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -61,6 +82,9 @@ namespace API.Migrations
                     b.Property<string>("CommentBody")
                         .HasColumnType("TEXT");
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("TEXT");
+
                     b.Property<Guid>("OwnerId")
                         .HasColumnType("TEXT");
 
@@ -73,7 +97,7 @@ namespace API.Migrations
 
                     b.HasIndex("ReviewId");
 
-                    b.ToTable("Comment");
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("Core.Entities.CommentLike", b =>
@@ -154,13 +178,61 @@ namespace API.Migrations
                     b.ToTable("Places");
                 });
 
+            modelBuilder.Entity("Core.Entities.Question", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("OwnerId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("PlaceId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("QuestionBody")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OwnerId");
+
+                    b.HasIndex("PlaceId");
+
+                    b.ToTable("Questions");
+                });
+
+            modelBuilder.Entity("Core.Entities.QuestionLikes", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("QuestionId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("QuestionId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("QuestionLikes");
+                });
+
             modelBuilder.Entity("Core.Entities.Review", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Body")
+                    b.Property<string>("Content")
                         .HasColumnType("TEXT");
 
                     b.Property<Guid?>("ImageId")
@@ -213,38 +285,6 @@ namespace API.Migrations
                     b.ToTable("ReviewLikes");
                 });
 
-            modelBuilder.Entity("Core.Entities.Train", b =>
-                {
-                    b.Property<Guid>("TrainId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("AriveTime")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("ClassAPrice")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ClassBPrice")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ClassCPrice")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("DepartureTime")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("TrainCode")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("TrainName")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("TrainId");
-
-                    b.ToTable("Trains");
-                });
-
             modelBuilder.Entity("Core.Entities.TrainStation", b =>
                 {
                     b.Property<Guid>("Id")
@@ -259,7 +299,22 @@ namespace API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Stations");
+                    b.ToTable("TrainStation");
+                });
+
+            modelBuilder.Entity("Core.Entities.Answer", b =>
+                {
+                    b.HasOne("Core.Entities.Question", "Question")
+                        .WithMany("Answers")
+                        .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Core.Entities.ApplicationUser", b =>
@@ -321,6 +376,36 @@ namespace API.Migrations
                     b.HasOne("Core.Entities.Image", "Image")
                         .WithMany()
                         .HasForeignKey("ImageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Core.Entities.Question", b =>
+                {
+                    b.HasOne("Core.Entities.ApplicationUser", "Owner")
+                        .WithMany()
+                        .HasForeignKey("OwnerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.Place", "Place")
+                        .WithMany()
+                        .HasForeignKey("PlaceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Core.Entities.QuestionLikes", b =>
+                {
+                    b.HasOne("Core.Entities.Question", "Question")
+                        .WithMany("Likes")
+                        .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
