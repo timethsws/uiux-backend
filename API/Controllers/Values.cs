@@ -48,12 +48,12 @@ namespace API.Controllers
         public async Task<IActionResult> getPlaces()
         {
             return Json(dbContext.Places.ToList());
+         
         }
-
+        [HttpGet("trains")]
+        public async Task<IActionResult> GetTrains()
+        {
+            return Json(dbContext.Trains.ToList());
+        }
     }
-
-
-
-
-
 }
