@@ -67,7 +67,7 @@ namespace API.Controllers
                     Id = review.Id,
                     Title = review.Title,
                     Content = review.Content,
-                    Image = review.Image.Url,
+                    Image = review.Image?.Url ?? "/images/placeholder-image.png",
                     Owner = new UserThumbDTO
                     {
                         Name = review.Reviewer.UserName,

@@ -29,16 +29,6 @@ namespace Core.Model
         /// <summary>
         /// PasswordHash
         /// </summary>
-        public String Password { get; set; }
-
-        /// <summary>
-        /// PhoneNumber
-        /// </summary>
-        public String PhoneNumber { get; set; }
-
-        /// <summary>
-        /// Profile picture as base64string
-        /// </summary>
-        public String ProfilePicture { get; set; }
+        public string Password { get; set; }
     }
 }

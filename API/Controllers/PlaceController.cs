@@ -77,7 +77,7 @@ namespace API.Controllers
                     Id = r.Id,
                     Title = r.Title,
                     Content = r.Content,
-                    Image = r.Image.Url,
+                    Image = r.Image?.Url ?? "/images/placeholder-image.png",
                     Rating = r.Rating,
                     Owner = new UserThumbDTO
                     {
@@ -122,7 +122,8 @@ namespace API.Controllers
                     Content = addReview.Content,
                     PlaceId = addReview.PlaceId,
                     ReviewerId = addReview.UserId,
-                    ReviewedOn = DateTime.UtcNow
+                    ReviewedOn = DateTime.UtcNow,
+                    Rating = addReview.Rating
                 };
 
                 dbContext.Reviews.Add(review);

@@ -28,7 +28,7 @@ namespace Core.Services
         /// <returns>Added user</returns>
         public async Task<OperationOutput<ApplicationUser>> AddUser (ApplicationUserModel userModel)
         {
-            if(userModel == null || userModel.Id != Guid.Empty)
+            if(userModel == null)
             {
                 return OperationOutput<ApplicationUser>.Failed("Arguments Null");
             }

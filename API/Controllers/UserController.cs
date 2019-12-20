@@ -40,7 +40,7 @@ namespace API.Controllers
                 var res = await userService.AddUser(userData);
                 if(!res.Status)
                 {
-                    return Json(OperationActionResult.Failed<ApplicationUser>(res.Message));
+                    return StatusCode(StatusCodes.Status401Unauthorized,res.Message);
                 }
 
                 return Json(OperationActionResult.Success(res.Value));
