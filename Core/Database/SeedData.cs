@@ -70,7 +70,7 @@ namespace Core.Database
                         Id = Guid.Parse("D00D120A-D563-442F-9ECE-358ED0B88ED7"),
                         Url = "https://upload.wikimedia.org/wikipedia/commons/6/63/Tower_Bridge_from_Shad_Thames.jpg"
                     }
-                   
+
                 },
                 new Place
                 {
@@ -107,12 +107,12 @@ namespace Core.Database
                 }
             };
 
-            if(!dbContext.Places.Any())
+            if (!dbContext.Places.Any())
             {
                 dbContext.Places.AddRange(places);
                 dbContext.SaveChanges();
             }
-            
+
             List<Review> reviews = new List<Review>
             {
                 new Review
@@ -209,8 +209,58 @@ namespace Core.Database
                 }
             };
 
-            if(!dbContext.Stations.Any()){
+            if (!dbContext.Stations.Any())
+            {
                 dbContext.Stations.AddRange(trainStations);
+                dbContext.SaveChanges();
+            }
+
+            var train = new List<Train>{
+                new Train{
+                    TrainId = Guid.Parse("e8b0a450-4e29-4d9c-9bd0-332eb83fb62b"),
+                    TrainName = "Train 1",
+                    TrainCode = "Code1",
+                    DepartureTime  = new DateTime().AddHours(3).AddMinutes(35),
+                    AriveTime = new DateTime().AddHours(13).AddMinutes(45),
+                    ClassAPrice = 50,
+                    ClassBPrice = 100,
+                    ClassCPrice = 200
+                },
+                new Train{
+                    TrainId = Guid.Parse("dba75052-0b74-4145-ad90-24a204488f9d"),
+                    TrainName = "Train 2",
+                    TrainCode = "Code2",
+                    DepartureTime  = new DateTime().AddHours(4).AddMinutes(32),
+                    AriveTime = new DateTime().AddHours(15).AddMinutes(45),
+                    ClassAPrice = 50,
+                    ClassBPrice = 100,
+                    ClassCPrice = 200
+                },
+                new Train{
+                    TrainId = Guid.Parse("c65d238f-3e3a-4427-80d5-2159f420a7cb"),
+                    TrainName = "Train 3",
+                    TrainCode = "Code3",
+                    DepartureTime  = new DateTime().AddHours(5).AddMinutes(32),
+                    AriveTime = new DateTime().AddHours(12).AddMinutes(45),
+                    ClassAPrice = 50,
+                    ClassBPrice = 100,
+                    ClassCPrice = 200
+                },
+                new Train{
+                    TrainId = Guid.Parse("13a88395-f079-488b-b8fc-c50e92557c5b"),
+                    TrainName = "Train 4",
+                    TrainCode = "Code4",
+                    DepartureTime  = new DateTime().AddHours(15).AddMinutes(32),
+                    AriveTime = new DateTime().AddHours(16).AddMinutes(45),
+                    ClassAPrice = 50,
+                    ClassBPrice = 100,
+                    ClassCPrice = 200
+                }
+            };
+
+            if (!dbContext.Trains.Any())
+            {
+                dbContext.Trains.AddRange(train);
                 dbContext.SaveChanges();
             }
 
