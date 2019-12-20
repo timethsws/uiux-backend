@@ -16,8 +16,9 @@ namespace Core.Database
         public DbSet<Place> Places { get; set; }
         public DbSet<Image> Images { get; set; }
         public DbSet<FavouritePlace> Favourits { get; set; }
+
         public DbSet<TrainStation> Stations { get; set; }
-        public DbSet<TrainStation> Trains { get; set; }
+        public DbSet<Train> Trains { get; set; }
 
         public DbSet<Question> Questions { get; set; }
         public DbSet<QuestionLikes> QuestionLikes { get; set; }
@@ -30,8 +31,5 @@ namespace Core.Database
 
         public DbSet<Comment> Comments { get; set; }
         public DbSet<CommentLike> CommentLikes { get; set; }
-
-        public DbSet<TrainStation> Stations { get; set; } 
-        public DbSet<Train> Trains {get; set;}
     }
 }
