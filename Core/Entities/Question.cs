@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Core.Entities
 {
-    public class Comment
+    public class Question
     {
         /// <summary>
         /// Identification
@@ -11,31 +11,30 @@ namespace Core.Entities
         public Guid Id { get; set; }
 
         /// <summary>
-        /// Comment Body
+        /// Question Body
         /// </summary>
-        public string CommentBody { get; set; }
+        public string QuestionBody { get; set; }
 
         /// <summary>
-        /// Created on
-        /// </summary>
-        public DateTime CreatedOn { get; set; }
-
-        /// <summary>
-        /// Owner of the comment
+        /// Creater of ghe Question
         /// </summary>
         public ApplicationUser Owner { get; set; }
         public Guid OwnerId { get; set; }
 
         /// <summary>
-        /// Review that this comment belongs to 
+        /// Place
         /// </summary>
-        public Review Review { get; set; }
-        public Guid ReviewId { get; set; }
+        public Place Place { get; set; }
+        public Guid PlaceId { get; set; }
 
         /// <summary>
-        /// Likes for this comment
+        /// Created on date
         /// </summary>
-        public virtual List<CommentLike> Likes { get; set; }
+        public DateTime CreatedOn { get; set; }
+
+        public virtual List<Answer> Answers { get; set; }
+
+        public virtual List<QuestionLikes> Likes { get; set; }
 
     }
 }

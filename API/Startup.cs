@@ -35,7 +35,12 @@ namespace API
                     builder.WithOrigins("http://192.168.1.3:3000").AllowAnyHeader().AllowAnyMethod();
                 });
             });
-            services.AddDbContext<AppDbContext>(options => options.UseSqlite("Data Source=app.db",b => b.MigrationsAssembly("API")));
+#if DEBUG
+            services.AddDbContext<AppDbContext>(options => options.UseSqlite("Data Source=app.db", b => b.MigrationsAssembly("API")));
+#else
+            services.AddDbContext<AppDbContext>(options => options.UseMySql("server=remotemysql.com;database=xZJVeUZXF4;user=xZJVeUZXF4;password=KOk2jJScNl", b => b.MigrationsAssembly("API")));
+#endif
+
             services.AddScoped<UserService>();
         }
 

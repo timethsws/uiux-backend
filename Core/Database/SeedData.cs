@@ -23,8 +23,7 @@ namespace Core.Database
                 {
                     Id = Guid.Parse("4C6E72B2-87DC-4CDC-A855-A72498DC067B"),
                     Email ="john@doe.com",
-                    FirstName ="John",
-                    LastName = "Doe",
+                    UserName ="John Doe",
                     ProfilePicture = new Image
                     {
                         Id = Guid.NewGuid(),
@@ -32,14 +31,12 @@ namespace Core.Database
                     },
                     Gender = Gender.Male,
                     PasswordHash = Encoding.UTF8.GetString(MySHA256.ComputeHash(Encoding.UTF8.GetBytes("Qwerty1@" + "MySecret"))),
-                    PhoneNumber = "0123456789",
                 },
                 new ApplicationUser
                 {
                     Id = Guid.Parse("65444AF4-841A-4B73-BE7F-C49CB7069C4B"),
                     Email ="jane@doe.com",
-                    FirstName ="Jane",
-                    LastName = "Doe",
+                    UserName ="Jane Doe",
                     ProfilePicture = new Image
                     {
                         Id = Guid.NewGuid(),
@@ -47,7 +44,6 @@ namespace Core.Database
                     },
                     Gender = Gender.Female,
                     PasswordHash = Encoding.UTF8.GetString(MySHA256.ComputeHash(Encoding.UTF8.GetBytes("Qwerty1@" + "MySecret"))),
-                    PhoneNumber = "0123456789",
                 }
             };
 
@@ -119,7 +115,7 @@ namespace Core.Database
                 {
                     Id = Guid.Parse("302AC5EF-BAAF-4697-8612-4E78F4B10F67"),
                     Title="Awesome Place!!!",
-                    Body = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                    Content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                     Image = new Image
                     {
                         Id = Guid.NewGuid(),
@@ -134,7 +130,7 @@ namespace Core.Database
                 {
                     Id = Guid.Parse("04536519-6BC2-4057-B888-849F131BC58D"),
                     Title="Will visit again !!!",
-                    Body = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                    Content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                     Image = new Image
                     {
                         Id = Guid.NewGuid(),
@@ -151,11 +147,11 @@ namespace Core.Database
                 {
                     Id = Guid.Parse("F8B09215-71C6-46B1-8C8A-ACC7AEC8B207"),
                     Title="Breathtaking !!!",
-                    Body = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                    Content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                     Image = new Image
                     {
                         Id = Guid.NewGuid(),
-                        Url = "https://www.apexcartage.com/wp-content/uploads/revslider/rev_slider_example/placeholder-red.png"
+                        Url = "https://mywowo.net/media/images/cache/londra_houses_of_parliament_02_westminster_big_ben_jpg_1200_630_cover_85.jpg"
 
                     },
                     Rating = Enums.Rating.Rate_3,
@@ -166,11 +162,11 @@ namespace Core.Database
                 {
                     Id = Guid.Parse("48ECD590-DE11-4A3D-A9ED-57D956A5924E"),
                     Title="Must Visit",
-                    Body = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                    Content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                     Image = new Image
                     {
                         Id = Guid.NewGuid(),
-                        Url = "https://www.apexcartage.com/wp-content/uploads/revslider/rev_slider_example/placeholder-red.png"
+                        Url = "https://lp-cms-production.imgix.net/news/2017/08/London.jpg"
 
                     },
                     Rating = Enums.Rating.Rate_3,

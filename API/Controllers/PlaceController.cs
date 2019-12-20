@@ -41,7 +41,7 @@ namespace API.Controllers
                 MainImage = place.Image.Url,
                 Name = place.Name,
                 Description = place.LongDescription,
-                //Liked = dbContext.Favourits?.Any(f => f.PlaceId == placeId && f.UserId == userId) ?? false
+                Liked = dbContext.Favourits?.Any(f => f.PlaceId == placeId && f.UserId == userId) ?? false
             };
 
             var images = await dbContext.Reviews.Include(r => r.Image).Where(r => r.PlaceId == placeId).Select(e => e.Image.Url).ToListAsync();
@@ -61,8 +61,11 @@ namespace API.Controllers
 
             var reviews = await dbContext.Reviews
                 .Include(r => r.Image)
+                .Include(r => r.Likes)
+                .Include(r => r.Comments)
                 .Include(r => r.Reviewer).ThenInclude(p => p.ProfilePicture)
                 .Where(p => p.PlaceId == placeId)
+                .OrderByDescending(r => r.ReviewedOn)
                 .ToListAsync();
 
             List<ReviewDTO> reviewsList = new List<ReviewDTO>();
@@ -73,18 +76,18 @@ namespace API.Controllers
                 {
                     Id = r.Id,
                     Title = r.Title,
-                    Content = r.Body,
+                    Content = r.Content,
                     Image = r.Image.Url,
                     Rating = r.Rating,
                     Owner = new UserThumbDTO
                     {
-                        Name = r.Reviewer.FirstName + " " + r.Reviewer.LastName,
+                        Name = r.Reviewer.UserName,
                         ProfileImage = r.Reviewer.ProfilePicture.Url
                     },
                     CommentCount = r.Comments?.Count() ?? 0,
-                    LikesCount = r.Likes?.Count()?? 0,
-                    Liked = r.Likes?.Any(l => l.UserId == userId) ?? false
-                    // TODO Others
+                    LikesCount = r.Likes?.Count() ?? 0,
+                    Liked = r.Likes?.Any(l => l.UserId == userId) ?? false,
+                    ReviewedOn = r.ReviewedOn,
                 };
 
                 reviewsList.Add(reviewDtoItem);
@@ -96,7 +99,7 @@ namespace API.Controllers
         [HttpPost("review")]
         public async Task<IActionResult> AddReview([FromForm]AddReviewModel addReview)
         {
-            if(addReview == null ||
+            if (addReview == null ||
                 addReview.UserId == Guid.Empty ||
                 addReview.PlaceId == Guid.Empty)
             {
@@ -116,7 +119,7 @@ namespace API.Controllers
                 var review = new Review
                 {
                     Title = addReview.Title,
-                    Body = addReview.Content,
+                    Content = addReview.Content,
                     PlaceId = addReview.PlaceId,
                     ReviewerId = addReview.UserId,
                     ReviewedOn = DateTime.UtcNow
@@ -132,5 +135,43 @@ namespace API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
+
+        [HttpPost("{placeId}/favourite/{userId}")]
+        public async Task<IActionResult> updateFavourite([FromRoute] Guid placeId, [FromRoute] Guid userId)
+        {
+            if(placeId == Guid.Empty && userId == Guid.Empty)
+            {
+                return BadRequest("Invalid data");
+            }
+
+            try
+            {
+                if(!dbContext.Places.Any(p => p.Id == placeId) || !dbContext.Users.Any(u => u.Id == userId))
+                {
+                    return BadRequest("Incorrect Data");
+                }
+
+                var favourite = await dbContext.Favourits.FirstOrDefaultAsync(f => f.PlaceId == placeId && f.UserId == userId);
+                if(favourite == null)
+                {
+                    dbContext.Favourits.Add(new FavouritePlace { PlaceId = placeId, UserId = userId });
+                    dbContext.SaveChanges();
+                    return Json(true);
+                }
+                else
+                {
+                    dbContext.Favourits.Remove(favourite);
+                    dbContext.SaveChanges();
+                    return Json(false);
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,ex.Message);
+            }
+        }
+
+        
     }
 }

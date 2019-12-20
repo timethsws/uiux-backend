@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace API.Migrations
 {
-    public partial class InitialMigrations : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -20,7 +20,7 @@ namespace API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Stations",
+                name: "TrainStation",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -29,25 +29,7 @@ namespace API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Stations", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Trains",
-                columns: table => new
-                {
-                    TrainId = table.Column<Guid>(nullable: false),
-                    TrainName = table.Column<string>(nullable: true),
-                    TrainCode = table.Column<string>(nullable: true),
-                    DepartureTime = table.Column<DateTime>(nullable: false),
-                    AriveTime = table.Column<DateTime>(nullable: false),
-                    ClassAPrice = table.Column<int>(nullable: false),
-                    ClassBPrice = table.Column<int>(nullable: false),
-                    ClassCPrice = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Trains", x => x.TrainId);
+                    table.PrimaryKey("PK_TrainStation", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -75,11 +57,9 @@ namespace API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true),
+                    UserName = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
                     PasswordHash = table.Column<string>(nullable: true),
-                    PhoneNumber = table.Column<string>(nullable: true),
                     ProfilePictureId = table.Column<Guid>(nullable: false),
                     Gender = table.Column<int>(nullable: false)
                 },
@@ -120,12 +100,39 @@ namespace API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Questions",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    QuestionBody = table.Column<string>(nullable: true),
+                    OwnerId = table.Column<Guid>(nullable: false),
+                    PlaceId = table.Column<Guid>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Questions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Questions_Users_OwnerId",
+                        column: x => x.OwnerId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Questions_Places_PlaceId",
+                        column: x => x.PlaceId,
+                        principalTable: "Places",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Reviews",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
                     Title = table.Column<string>(nullable: true),
-                    Body = table.Column<string>(nullable: true),
+                    Content = table.Column<string>(nullable: true),
                     Rating = table.Column<int>(nullable: false),
                     ReviewedOn = table.Column<DateTime>(nullable: false),
                     ReviewerId = table.Column<Guid>(nullable: false),
@@ -156,25 +163,78 @@ namespace API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Comment",
+                name: "Answers",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    QuestionId = table.Column<Guid>(nullable: false),
+                    UserId = table.Column<Guid>(nullable: false),
+                    Content = table.Column<string>(nullable: true),
+                    CreatedOn = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Answers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Answers_Questions_QuestionId",
+                        column: x => x.QuestionId,
+                        principalTable: "Questions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Answers_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "QuestionLikes",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    UserId = table.Column<Guid>(nullable: false),
+                    QuestionId = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_QuestionLikes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_QuestionLikes_Questions_QuestionId",
+                        column: x => x.QuestionId,
+                        principalTable: "Questions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_QuestionLikes_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Comments",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
                     CommentBody = table.Column<string>(nullable: true),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
                     OwnerId = table.Column<Guid>(nullable: false),
                     ReviewId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Comment", x => x.Id);
+                    table.PrimaryKey("PK_Comments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Comment_Users_OwnerId",
+                        name: "FK_Comments_Users_OwnerId",
                         column: x => x.OwnerId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Comment_Reviews_ReviewId",
+                        name: "FK_Comments_Reviews_ReviewId",
                         column: x => x.ReviewId,
                         principalTable: "Reviews",
                         principalColumn: "Id",
@@ -207,6 +267,31 @@ namespace API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "AnswerLikes",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    AnswerId = table.Column<Guid>(nullable: false),
+                    UserId = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AnswerLikes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AnswerLikes_Answers_AnswerId",
+                        column: x => x.AnswerId,
+                        principalTable: "Answers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AnswerLikes_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CommentLikes",
                 columns: table => new
                 {
@@ -218,9 +303,9 @@ namespace API.Migrations
                 {
                     table.PrimaryKey("PK_CommentLikes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CommentLikes_Comment_CommentId",
+                        name: "FK_CommentLikes_Comments_CommentId",
                         column: x => x.CommentId,
-                        principalTable: "Comment",
+                        principalTable: "Comments",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -232,14 +317,24 @@ namespace API.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Comment_OwnerId",
-                table: "Comment",
-                column: "OwnerId");
+                name: "IX_AnswerLikes_AnswerId",
+                table: "AnswerLikes",
+                column: "AnswerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Comment_ReviewId",
-                table: "Comment",
-                column: "ReviewId");
+                name: "IX_AnswerLikes_UserId",
+                table: "AnswerLikes",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Answers_QuestionId",
+                table: "Answers",
+                column: "QuestionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Answers_UserId",
+                table: "Answers",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CommentLikes_CommentId",
@@ -250,6 +345,16 @@ namespace API.Migrations
                 name: "IX_CommentLikes_UserId",
                 table: "CommentLikes",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comments_OwnerId",
+                table: "Comments",
+                column: "OwnerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comments_ReviewId",
+                table: "Comments",
+                column: "ReviewId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Favourits_PlaceId",
@@ -265,6 +370,26 @@ namespace API.Migrations
                 name: "IX_Places_ImageId",
                 table: "Places",
                 column: "ImageId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_QuestionLikes_QuestionId",
+                table: "QuestionLikes",
+                column: "QuestionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_QuestionLikes_UserId",
+                table: "QuestionLikes",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Questions_OwnerId",
+                table: "Questions",
+                column: "OwnerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Questions_PlaceId",
+                table: "Questions",
+                column: "PlaceId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ReviewLikes_ReviewId",
@@ -300,22 +425,31 @@ namespace API.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "AnswerLikes");
+
+            migrationBuilder.DropTable(
                 name: "CommentLikes");
 
             migrationBuilder.DropTable(
                 name: "Favourits");
 
             migrationBuilder.DropTable(
+                name: "QuestionLikes");
+
+            migrationBuilder.DropTable(
                 name: "ReviewLikes");
 
             migrationBuilder.DropTable(
-                name: "Stations");
+                name: "TrainStation");
 
             migrationBuilder.DropTable(
-                name: "Trains");
+                name: "Answers");
 
             migrationBuilder.DropTable(
-                name: "Comment");
+                name: "Comments");
+
+            migrationBuilder.DropTable(
+                name: "Questions");
 
             migrationBuilder.DropTable(
                 name: "Reviews");

@@ -1,7 +1,7 @@
 ﻿using System;
 namespace API.DTOs
 {
-    public class RegisterUserDTO
+    public class ApplicationUserDTO
     {
         /// <summary>
         /// Identifier
@@ -11,22 +11,17 @@ namespace API.DTOs
         /// <summary>
         /// First Name
         /// </summary>
-        public String FirstName { get; set; }
-
-        /// <summary>
-        /// Last Name
-        /// </summary>
-        public String LastName { get; set; }
+        public string UserName { get; set; }
 
         /// <summary>
         /// Email
         /// </summary>
-        public String Email { get; set; }
+        public string Email { get; set; }
 
         /// <summary>
-        /// PhoneNumber
+        /// Profile Image
         /// </summary>
-        public String PhoneNumber { get; set; }
+        public string ProfileImage { get; set; }
 
     }
 }

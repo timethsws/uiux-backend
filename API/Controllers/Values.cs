@@ -44,16 +44,16 @@ namespace API.Controllers
             return Json(dbContext.Stations.ToList());
         }
 
-         [HttpGet("trains")]
+        [HttpGet("places")]
+        public async Task<IActionResult> getPlaces()
+        {
+            return Json(dbContext.Places.ToList());
+         
+        }
+        [HttpGet("trains")]
         public async Task<IActionResult> GetTrains()
         {
             return Json(dbContext.Trains.ToList());
         }
-
     }
-
-
-
-
-
 }

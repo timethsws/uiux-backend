@@ -19,7 +19,7 @@ namespace Core.Entities
         /// <summary>
         /// Review Data
         /// </summary>
-        public String Body { get; set; }
+        public String Content { get; set; }
 
         /// <summary>
         /// Rating data
