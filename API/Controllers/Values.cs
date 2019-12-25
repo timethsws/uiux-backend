@@ -47,7 +47,7 @@ namespace API.Controllers
         [HttpGet("places")]
         public async Task<IActionResult> getPlaces()
         {
-            return Json(dbContext.Places.ToList());
+            return Json(dbContext.Places.Include(p => p.Image).ToList());
          
         }
         [HttpGet("trains")]

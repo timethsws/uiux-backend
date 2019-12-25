@@ -24,6 +24,11 @@ namespace Core.Entities
         public string LongDescription { get; set; }
 
         /// <summary>
+        /// Short Description
+        /// </summary>
+        public string ShortDescription { get; set; }
+
+        /// <summary>
         /// Main Image
         /// </summary>
         public Guid ImageId { get; set; }

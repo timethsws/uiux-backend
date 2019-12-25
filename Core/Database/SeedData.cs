@@ -9,10 +9,6 @@ namespace Core.Database
 {
     public class SeedData
     {
-        public SeedData()
-        {
-        }
-
         public static void SeedDatabase(AppDbContext dbContext)
         {
             var MySHA256 = SHA256.Create();
@@ -60,6 +56,7 @@ namespace Core.Database
                 {
                     Id = Guid.Parse("94EAB6AD-8062-4CE2-A982-3CA495652363"),
                     Name ="Tower Bridge",
+                    ShortDescription ="This is the short description for the Tower Bridge",
                     LongDescription ="Tower Bridge is a combined bascule and suspension bridge in London, built between 1886 and 1894. The bridge crosses the River Thames close to the Tower of London and has become an iconic symbol of London. As a result, it is sometimes confused with London Bridge, about half a mile (0.8 km) upstream. Tower Bridge is one of five London bridges owned and maintained by the Bridge House Estates, a charitable trust overseen by the City of London Corporation. It is the only one of the trust's bridges not to connect the City of London directly to the Southwark bank, as its northern landfall is in Tower Hamlets.",
                     Image = new Image
                     {
@@ -72,6 +69,7 @@ namespace Core.Database
                 {
                     Id = Guid.Parse("D4A1AFB0-1968-41FD-9646-AEFFCB21E736"),
                     Name ="Big Ben",
+                    ShortDescription ="This is the short description for the Big Ben",
                     LongDescription ="Big Ben is the nickname for the Great Bell of the striking clock at the north end of the Palace of Westminster in London[1] and is usually extended to refer to both the clock and the clock tower.[2][3] The official name of the tower in which Big Ben is located was originally the Clock Tower, but it was renamed Elizabeth Tower in 2012 to mark the Diamond Jubilee of Elizabeth II.The tower was designed by Augustus Pugin in a neo-Gothic style. When completed in 1859, its clock was the largest and most accurate four-faced striking and chiming clock in the world.[4] The tower stands 315 feet (96 m) tall, and the climb from ground level to the belfry is 334 steps. Its base is square, measuring 39 feet (12 m) on each side. Dials of the clock are 23 feet (7.0 m) in diameter. On 31 May 2009, celebrations were held to mark the tower's 150th anniversary.",
                     Image = new Image
                     {
@@ -83,6 +81,7 @@ namespace Core.Database
                 {
                     Id = Guid.Parse("CA6FE982-3379-4B47-93ED-4923FF893ECD"),
                     Name ="Coca-Cola London Eye",
+                    ShortDescription ="This is the short description for the Coca-Cola London Eye",
                     LongDescription ="Tower Bridge is a combined bascule and suspension bridge in London, built between 1886 and 1894. The bridge crosses the River Thames close to the Tower of London and has become an iconic symbol of London. As a result, it is sometimes confused with London Bridge, about half a mile (0.8 km) upstream. Tower Bridge is one of five London bridges owned and maintained by the Bridge House Estates, a charitable trust overseen by the City of London Corporation. It is the only one of the trust's bridges not to connect the City of London directly to the Southwark bank, as its northern landfall is in Tower Hamlets.",
                     Image = new Image
                     {
@@ -94,6 +93,7 @@ namespace Core.Database
                 {
                     Id = Guid.Parse("55B399EA-8264-4A18-AACE-3ED413B715EA"),
                     Name ="Tower of London",
+                    ShortDescription ="This is the short description for the Tower of London",
                     LongDescription ="Tower Bridge is a combined bascule and suspension bridge in London, built between 1886 and 1894. The bridge crosses the River Thames close to the Tower of London and has become an iconic symbol of London. As a result, it is sometimes confused with London Bridge, about half a mile (0.8 km) upstream. Tower Bridge is one of five London bridges owned and maintained by the Bridge House Estates, a charitable trust overseen by the City of London Corporation. It is the only one of the trust's bridges not to connect the City of London directly to the Southwark bank, as its northern landfall is in Tower Hamlets.",
                     Image = new Image
                     {

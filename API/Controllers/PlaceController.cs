@@ -114,7 +114,10 @@ namespace API.Controllers
             try
             {
                 if (!dbContext.Places.Any(p => p.Id == addReview.PlaceId)) return BadRequest("Invalid Place");
-                if (!dbContext.Users.Any(u => u.Id == addReview.UserId)) return BadRequest("Invalid User");
+                var user = await dbContext.Users.FirstOrDefaultAsync(u => u.Id == addReview.UserId);
+                if (user == null) return BadRequest("Invalid User");
+
+                user.Score += 100;
 
                 var review = new Review
                 {
@@ -173,6 +176,5 @@ namespace API.Controllers
             }
         }
 
-        
     }
 }

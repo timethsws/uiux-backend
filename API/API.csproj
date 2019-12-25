@@ -26,5 +26,6 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.0.0" />
+    <PackageReference Include="Sendgrid" Version="9.12.0" />
   </ItemGroup>
 </Project>

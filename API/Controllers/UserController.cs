@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using API.DTOs;
 using Core.Database;
@@ -91,7 +92,7 @@ namespace API.Controllers
         }
 
         [HttpGet("{userId}")]
-        public async Task<IActionResult> GetUser ([FromQuery] Guid userId)
+        public async Task<IActionResult> GetUser ([FromRoute] Guid userId)
         {
             if(userId == Guid.Empty)
             {
@@ -108,13 +109,36 @@ namespace API.Controllers
                     return Json(OperationActionResult.Failed<ApplicationUserDTO>("UserNotFound"));
                 }
 
-                return Json(OperationActionResult.Success(new ApplicationUserDTO
-                {
-                    Id = user.Id,
-                    Email = user.Email,
-                    UserName = user.UserName
-                }));
+                return Json(user);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
 
+        [HttpGet("{userId}/favourits")]
+        public async Task<IActionResult> GetFavourits ([FromRoute] Guid userId)
+        {
+            if(userId == Guid.Empty)
+            {
+                return BadRequest("Invalid Data");
+            }
+
+            try
+            {
+                var user = await dbContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
+
+                if(user == null)
+                {
+                    return BadRequest("Invalid Data");
+                }
+
+                var favourits = dbContext.Favourits
+                    .Include(f => f.Place).ThenInclude(p => p.Image)
+                    .Where(f => f.UserId == userId).ToList();
+
+                return Json(favourits);
             }
             catch (Exception ex)
             {

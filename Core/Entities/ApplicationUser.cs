@@ -37,7 +37,15 @@ namespace Core.Entities
         public Guid ProfilePictureId { get; set; }
         public Image ProfilePicture { get; set; }
 
+        /// <summary>
+        /// Gender of the users
+        /// </summary>
         public Gender Gender { get; set; }
+
+        /// <summary>
+        /// Score of the user
+        /// </summary>
+        public int Score { get; set; }
 
     }
 

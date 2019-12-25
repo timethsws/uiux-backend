@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Core.Database;
 using Core.Services;
 using Microsoft.AspNetCore.Builder;
@@ -31,14 +27,15 @@ namespace API
                 options.AddDefaultPolicy(
                 builder =>
                 {
+#if DEBUG
                     builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+#else
+                    builder.WithOrigins("http://traveller-frontend.azurewebsites.net").AllowAnyHeader().AllowAnyMethod();
+#endif
+                    
                 });
             });
-#if DEBUG
-            services.AddDbContext<AppDbContext>(options => options.UseSqlite("Data Source=app.db", b => b.MigrationsAssembly("API")));
-#else
             services.AddDbContext<AppDbContext>(options => options.UseMySql("server=remotemysql.com;database=xZJVeUZXF4;user=xZJVeUZXF4;password=KOk2jJScNl", b => b.MigrationsAssembly("API")));
-#endif
 
             services.AddScoped<UserService>();
         }

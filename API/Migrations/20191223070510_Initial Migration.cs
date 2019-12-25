@@ -20,7 +20,7 @@ namespace API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TrainStation",
+                name: "Stations",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -29,7 +29,25 @@ namespace API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TrainStation", x => x.Id);
+                    table.PrimaryKey("PK_Stations", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Trains",
+                columns: table => new
+                {
+                    TrainId = table.Column<Guid>(nullable: false),
+                    TrainName = table.Column<string>(nullable: true),
+                    TrainCode = table.Column<string>(nullable: true),
+                    DepartureTime = table.Column<DateTime>(nullable: false),
+                    AriveTime = table.Column<DateTime>(nullable: false),
+                    ClassAPrice = table.Column<int>(nullable: false),
+                    ClassBPrice = table.Column<int>(nullable: false),
+                    ClassCPrice = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Trains", x => x.TrainId);
                 });
 
             migrationBuilder.CreateTable(
@@ -39,6 +57,7 @@ namespace API.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     LongDescription = table.Column<string>(nullable: true),
+                    ShortDescription = table.Column<string>(nullable: true),
                     ImageId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
@@ -61,7 +80,8 @@ namespace API.Migrations
                     Email = table.Column<string>(nullable: true),
                     PasswordHash = table.Column<string>(nullable: true),
                     ProfilePictureId = table.Column<Guid>(nullable: false),
-                    Gender = table.Column<int>(nullable: false)
+                    Gender = table.Column<int>(nullable: false),
+                    Score = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -440,7 +460,10 @@ namespace API.Migrations
                 name: "ReviewLikes");
 
             migrationBuilder.DropTable(
-                name: "TrainStation");
+                name: "Stations");
+
+            migrationBuilder.DropTable(
+                name: "Trains");
 
             migrationBuilder.DropTable(
                 name: "Answers");

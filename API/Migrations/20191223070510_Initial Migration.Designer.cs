@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20191218083227_Initial Migration")]
+    [Migration("20191223070510_Initial Migration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -83,6 +83,9 @@ namespace API.Migrations
 
                     b.Property<Guid>("ProfilePictureId")
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("Score")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("UserName")
                         .HasColumnType("TEXT");
@@ -190,6 +193,9 @@ namespace API.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ShortDescription")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -306,6 +312,38 @@ namespace API.Migrations
                     b.ToTable("ReviewLikes");
                 });
 
+            modelBuilder.Entity("Core.Entities.Train", b =>
+                {
+                    b.Property<Guid>("TrainId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("AriveTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("ClassAPrice")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ClassBPrice")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ClassCPrice")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("DepartureTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("TrainCode")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("TrainName")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("TrainId");
+
+                    b.ToTable("Trains");
+                });
+
             modelBuilder.Entity("Core.Entities.TrainStation", b =>
                 {
                     b.Property<Guid>("Id")
@@ -320,7 +358,7 @@ namespace API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TrainStation");
+                    b.ToTable("Stations");
                 });
 
             modelBuilder.Entity("Core.Entities.Answer", b =>

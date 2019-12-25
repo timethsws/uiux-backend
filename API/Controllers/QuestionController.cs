@@ -45,6 +45,8 @@ namespace API.Controllers
                     .OrderByDescending(q => q.CreatedOn)
                     .ToList();
 
+                var user = await dbContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
+
                 var res = new List<QuestionDTO>();
 
                 foreach(var question in questions)
@@ -233,6 +235,9 @@ namespace API.Controllers
 
             try
             {
+                var user = await dbContext.Users.FirstOrDefaultAsync(u => u.Id == answerModel.userId);
+                user.Score += 25;
+
                 var answer = new Answer
                 {
                     Content = answerModel.body,
@@ -245,7 +250,6 @@ namespace API.Controllers
                 dbContext.SaveChanges();
 
                 return Json(true);
-
             }
             catch (Exception ex)
             {
@@ -296,7 +300,6 @@ namespace API.Controllers
                 }
 
                 return Json(res);
-
             }
             catch (Exception ex)
             {
@@ -347,5 +350,6 @@ namespace API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
+
     }
 }

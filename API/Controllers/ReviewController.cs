@@ -148,6 +148,9 @@ namespace API.Controllers
                     return BadRequest("Invalid data");
                 }
 
+                var user = await dbContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
+                user.Score += 10;
+
                 var comments = await dbContext.Comments
                     .Include(c => c.Owner).ThenInclude(u => u.ProfilePicture)
                     .Include(c => c.Likes)
