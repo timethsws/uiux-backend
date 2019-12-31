@@ -92,7 +92,6 @@ namespace API.Controllers
 
                 reviewsList.Add(reviewDtoItem);
             }
-
             return Json(reviewsList);
         }
 
@@ -150,11 +149,6 @@ namespace API.Controllers
 
             try
             {
-                if(!dbContext.Places.Any(p => p.Id == placeId) || !dbContext.Users.Any(u => u.Id == userId))
-                {
-                    return BadRequest("Incorrect Data");
-                }
-
                 var favourite = await dbContext.Favourits.FirstOrDefaultAsync(f => f.PlaceId == placeId && f.UserId == userId);
                 if(favourite == null)
                 {

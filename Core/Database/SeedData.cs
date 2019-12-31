@@ -61,7 +61,7 @@ namespace Core.Database
                     Image = new Image
                     {
                         Id = Guid.Parse("D00D120A-D563-442F-9ECE-358ED0B88ED7"),
-                        Url = "https://upload.wikimedia.org/wikipedia/commons/6/63/Tower_Bridge_from_Shad_Thames.jpg"
+                        Url = "http://upload.wikimedia.org/wikipedia/commons/6/63/Tower_Bridge_from_Shad_Thames.jpg"
                     }
 
                 },
@@ -70,11 +70,11 @@ namespace Core.Database
                     Id = Guid.Parse("D4A1AFB0-1968-41FD-9646-AEFFCB21E736"),
                     Name ="Big Ben",
                     ShortDescription ="This is the short description for the Big Ben",
-                    LongDescription ="Big Ben is the nickname for the Great Bell of the striking clock at the north end of the Palace of Westminster in London[1] and is usually extended to refer to both the clock and the clock tower.[2][3] The official name of the tower in which Big Ben is located was originally the Clock Tower, but it was renamed Elizabeth Tower in 2012 to mark the Diamond Jubilee of Elizabeth II.The tower was designed by Augustus Pugin in a neo-Gothic style. When completed in 1859, its clock was the largest and most accurate four-faced striking and chiming clock in the world.[4] The tower stands 315 feet (96 m) tall, and the climb from ground level to the belfry is 334 steps. Its base is square, measuring 39 feet (12 m) on each side. Dials of the clock are 23 feet (7.0 m) in diameter. On 31 May 2009, celebrations were held to mark the tower's 150th anniversary.",
+                    LongDescription ="Big Ben is the nickname for the Great Bell of the striking clock at the north end of the Palace of Westminster in London[1] and is usually extended to refer to both the clock and the clock tower.[2][3] The official Name of the tower in which Big Ben is located was originally the Clock Tower, but it was renamed Elizabeth Tower in 2012 to mark the Diamond Jubilee of Elizabeth II.The tower was designed by Augustus Pugin in a neo-Gothic style. When completed in 1859, its clock was the largest and most accurate four-faced striking and chiming clock in the world.[4] The tower stands 315 feet (96 m) tall, and the climb from ground level to the belfry is 334 steps. Its base is square, measuring 39 feet (12 m) on each side. Dials of the clock are 23 feet (7.0 m) in diameter. On 31 May 2009, celebrations were held to mark the tower's 150th anniversary.",
                     Image = new Image
                     {
                         Id = Guid.Parse("E3C7F467-9115-41BD-BA2B-10EC79609D55"),
-                        Url = "https://images.theconversation.com/files/182776/original/file-20170821-27160-1kwep4u.jpg"
+                        Url = "http://images.theconversation.com/files/182776/original/file-20170821-27160-1kwep4u.jpg"
                     }
                 },
                 new Place
@@ -86,7 +86,7 @@ namespace Core.Database
                     Image = new Image
                     {
                         Id = Guid.Parse("C6136239-8852-419B-8399-1D88749B880D"),
-                        Url = "https://upload.wikimedia.org/wikipedia/commons/d/d6/London-Eye-2009.JPG"
+                        Url = "http://upload.wikimedia.org/wikipedia/commons/d/d6/London-Eye-2009.JPG"
                     }
                 },
                 new Place
@@ -98,7 +98,7 @@ namespace Core.Database
                     Image = new Image
                     {
                         Id = Guid.Parse("D2CC58D2-2554-4CEE-91B3-CAFF50EFF78B"),
-                        Url = "https://lonelyplanetimages.imgix.net/a/g/hi/t/145074adb387be6f8f357d7dc3ae9e3c-tower-of-london.jpg"
+                        Url = "http://lonelyplanetimages.imgix.net/a/g/hi/t/145074adb387be6f8f357d7dc3ae9e3c-tower-of-london.jpg"
                     }
                 }
             };
@@ -119,7 +119,7 @@ namespace Core.Database
                     Image = new Image
                     {
                         Id = Guid.NewGuid(),
-                        Url = "https://www.apexcartage.com/wp-content/uploads/revslider/rev_slider_example/placeholder-red.png"
+                        Url = "http://www.apexcartage.com/wp-content/uploads/revslider/rev_slider_example/placeholder-red.png"
 
                     },
                     Rating = Enums.Rating.Rate_3,
@@ -134,7 +134,7 @@ namespace Core.Database
                     Image = new Image
                     {
                         Id = Guid.NewGuid(),
-                        Url = "https://www.apexcartage.com/wp-content/uploads/revslider/rev_slider_example/placeholder-red.png"
+                        Url = "http://www.apexcartage.com/wp-content/uploads/revslider/rev_slider_example/placeholder-red.png"
 
                     },
                     Rating = Enums.Rating.Rate_3,
@@ -151,7 +151,7 @@ namespace Core.Database
                     Image = new Image
                     {
                         Id = Guid.NewGuid(),
-                        Url = "https://mywowo.net/media/images/cache/londra_houses_of_parliament_02_westminster_big_ben_jpg_1200_630_cover_85.jpg"
+                        Url = "http://mywowo.net/media/images/cache/londra_houses_of_parliament_02_westminster_big_ben_jpg_1200_630_cover_85.jpg"
 
                     },
                     Rating = Enums.Rating.Rate_3,
@@ -166,7 +166,7 @@ namespace Core.Database
                     Image = new Image
                     {
                         Id = Guid.NewGuid(),
-                        Url = "https://lp-cms-production.imgix.net/news/2017/08/London.jpg"
+                        Url = "http://lp-cms-production.imgix.net/news/2017/08/London.jpg"
 
                     },
                     Rating = Enums.Rating.Rate_3,
@@ -183,25 +183,113 @@ namespace Core.Database
             }
 
             var trainStations = new List<TrainStation>{
-                new TrainStation{
-                    Id = Guid.Parse("1aca7407-dee9-4ffb-9bf8-5bf9e2923bee"),
-                    StationName = "Station 1",
-                    StationCode ="Code1"
+                new TrainStation
+                {
+                    Id = Guid.NewGuid(),
+                    Name="Abbey Wood",
+                    Code="ABW"
                 },
-                new TrainStation{
-                    Id = Guid.Parse("742357d6-5036-4bc5-97ce-7f93ecc762b7"),
-                    StationName = "Station 2",
-                    StationCode ="Code2"
+                new TrainStation
+                {
+                    Id = Guid.NewGuid(),
+                    Name="Atherstone",
+                    Code="ATH"
+                },new TrainStation
+
+                {
+                    Id = Guid.NewGuid(),
+                    Name="Bardon Mill",
+                    Code="BLL"
                 },
-                new TrainStation{
-                    Id = Guid.Parse("10218c84-ef73-422f-9f6c-21c6e062f0e0"),
-                    StationName = "Station 3",
-                    StationCode ="Code3"
+                new TrainStation
+                {
+                    Id = Guid.NewGuid(),
+                    Name="Builth Road",
+                    Code="BHR"
                 },
-                new TrainStation{
-                    Id = Guid.Parse("d17bdf85-0a49-436b-b4bb-efe07edca99c"),
-                    StationName = "Station 4",
-                    StationCode ="Code4"
+                new TrainStation
+                {
+                    Id = Guid.NewGuid(),
+                    Name="Dalwhinnie",
+                    Code="DLW"
+                },
+                new TrainStation
+                {
+                    Id = Guid.NewGuid(),
+                    Name="Dunbar",
+                    Code="DUN"
+                },
+                new TrainStation
+                {
+                    Id = Guid.NewGuid(),
+                    Name="Eskbank",
+                    Code="EKB"
+                },
+                new TrainStation
+                {
+                    Id = Guid.NewGuid(),
+                    Name="Fairwater",
+                    Code="FRW"
+                },
+                new TrainStation
+                {
+                    Id = Guid.NewGuid(),
+                    Name="Fort William",
+                    Code="FTW"
+                },
+                new TrainStation
+                {
+                    Id = Guid.NewGuid(),
+                    Name="Isleworth",
+                    Code="ISL"
+                },
+                new TrainStation
+                {
+                    Id = Guid.NewGuid(),
+                    Name="Ivybridge",
+                    Code="IVY"
+                },
+                new TrainStation
+                {
+                    Id = Guid.NewGuid(),
+                    Name="Kirkwood",
+                    Code="KWD"
+                },
+                new TrainStation
+                {
+                    Id = Guid.NewGuid(),
+                    Name="Manchester Airport",
+                    Code="MCO"
+                },
+                new TrainStation
+                {
+                    Id = Guid.NewGuid(),
+                    Name="Maryland",
+                    Code="MYL"
+                },
+                new TrainStation
+                {
+                    Id = Guid.NewGuid(),
+                    Name="Mottingham",
+                    Code="MTG"
+                },
+                new TrainStation
+                {
+                    Id = Guid.NewGuid(),
+                    Name="Tadworth",
+                    Code="TAD"
+                },
+                new TrainStation
+                {
+                    Id = Guid.NewGuid(),
+                    Name="Turkey Street",
+                    Code="TUR"
+                },
+                new TrainStation
+                {
+                    Id = Guid.NewGuid(),
+                    Name="Warminster",
+                    Code="WMN"
                 }
             };
 
@@ -212,46 +300,75 @@ namespace Core.Database
             }
 
             var train = new List<Train>{
-                new Train{
-                    TrainId = Guid.Parse("e8b0a450-4e29-4d9c-9bd0-332eb83fb62b"),
-                    TrainName = "Train 1",
-                    TrainCode = "Code1",
-                    DepartureTime  = new DateTime().AddHours(3).AddMinutes(35),
-                    AriveTime = new DateTime().AddHours(13).AddMinutes(45),
+                new Train
+                {
+                    Id=Guid.NewGuid(),
+                    Name = "Devon Express",
                     ClassAPrice = 50,
                     ClassBPrice = 100,
-                    ClassCPrice = 200
+                    ClassCPrice = 200,
                 },
-                new Train{
-                    TrainId = Guid.Parse("dba75052-0b74-4145-ad90-24a204488f9d"),
-                    TrainName = "Train 2",
-                    TrainCode = "Code2",
-                    DepartureTime  = new DateTime().AddHours(4).AddMinutes(32),
-                    AriveTime = new DateTime().AddHours(15).AddMinutes(45),
+                new Train
+                {
+                    Id=Guid.NewGuid(),
+                    Name = "East Anglian",
                     ClassAPrice = 50,
                     ClassBPrice = 100,
-                    ClassCPrice = 200
+                    ClassCPrice = 200,
                 },
-                new Train{
-                    TrainId = Guid.Parse("c65d238f-3e3a-4427-80d5-2159f420a7cb"),
-                    TrainName = "Train 3",
-                    TrainCode = "Code3",
-                    DepartureTime  = new DateTime().AddHours(5).AddMinutes(32),
-                    AriveTime = new DateTime().AddHours(12).AddMinutes(45),
+                new Train
+                {
+                    Id=Guid.NewGuid(),
+                    Name = "Enterprise",
                     ClassAPrice = 50,
                     ClassBPrice = 100,
-                    ClassCPrice = 200
+                    ClassCPrice = 200,
                 },
-                new Train{
-                    TrainId = Guid.Parse("13a88395-f079-488b-b8fc-c50e92557c5b"),
-                    TrainName = "Train 4",
-                    TrainCode = "Code4",
-                    DepartureTime  = new DateTime().AddHours(15).AddMinutes(32),
-                    AriveTime = new DateTime().AddHours(16).AddMinutes(45),
+                new Train
+                {
+                    Id=Guid.NewGuid(),
+                    Name = "Flying Scotsman",
                     ClassAPrice = 50,
                     ClassBPrice = 100,
-                    ClassCPrice = 200
-                }
+                    ClassCPrice = 200,
+
+                },
+                new Train
+                {
+                    Id=Guid.NewGuid(),
+                    Name = "Master Cutler",
+                    ClassAPrice = 50,
+                    ClassBPrice = 100,
+                    ClassCPrice = 200,
+
+                },
+                new Train
+                {
+                    Id=Guid.NewGuid(),
+                    Name = "Mayflower",
+                    ClassAPrice = 50,
+                    ClassBPrice = 100,
+                    ClassCPrice = 200,
+
+                },
+                new Train
+                {
+                    Id=Guid.NewGuid(),
+                    Name = "The Merchant Venturer",
+                    ClassAPrice = 50,
+                    ClassBPrice = 100,
+                    ClassCPrice = 200,
+
+                },
+                new Train
+                {
+                    Id=Guid.NewGuid(),
+                    Name = "Night Riviera",
+                    ClassAPrice = 50,
+                    ClassBPrice = 100,
+                    ClassCPrice = 200,
+
+                },
             };
 
             if (!dbContext.Trains.Any())
@@ -259,7 +376,6 @@ namespace Core.Database
                 dbContext.Trains.AddRange(train);
                 dbContext.SaveChanges();
             }
-
 
         }
     }

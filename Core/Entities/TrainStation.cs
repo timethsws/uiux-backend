@@ -6,9 +6,9 @@ namespace Core.Entities
     {
         public Guid Id { get; set; }
         
-        public string StationName { get; set; }
+        public string Name { get; set; }
 
-        public string StationCode { get; set; }
+        public string Code { get; set; }
 
     }
 

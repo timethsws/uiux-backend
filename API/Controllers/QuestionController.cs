@@ -144,11 +144,6 @@ namespace API.Controllers
 
             try
             {
-                if (!dbContext.Questions.Any(c => c.Id == questionId) || !dbContext.Users.Any(u => u.Id == userId))
-                {
-                    return BadRequest("Invalid data");
-                }
-
                 var questionLike = await dbContext.QuestionLikes.FirstOrDefaultAsync(c => c.QuestionId == questionId && c.UserId == userId);
                 var res = new LikeDTO();
 
@@ -168,7 +163,7 @@ namespace API.Controllers
                 }
 
                 dbContext.SaveChanges();
-                res.Count = dbContext.QuestionLikes.Count(c => c.QuestionId == questionId);
+                //res.Count = dbContext.QuestionLikes.Count(c => c.QuestionId == questionId);
 
                 return Json(res);
             }
@@ -317,11 +312,6 @@ namespace API.Controllers
 
             try
             {
-                if (!dbContext.Answers.Any(c => c.Id == answerId) || !dbContext.Users.Any(u => u.Id == userId))
-                {
-                    return BadRequest("Invalid data");
-                }
-
                 var answerLike = await dbContext.AnswerLikes.FirstOrDefaultAsync(c => c.AnswerId == answerId && c.UserId == userId);
                 var res = new LikeDTO();
 
@@ -341,7 +331,7 @@ namespace API.Controllers
                 }
 
                 dbContext.SaveChanges();
-                res.Count = dbContext.AnswerLikes.Count(c => c.AnswerId == answerId);
+                //res.Count = dbContext.AnswerLikes.Count(c => c.AnswerId == answerId);
 
                 return Json(res);
             }

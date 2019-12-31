@@ -12,16 +12,6 @@ namespace API.Controllers
     [Route("api/[controller]")]
     public class TicketsController : Controller
     {
-        public Guid Id { get; set; }
-
-        public TrainStation Start { get; set; }
-
-        public TrainStation End { get; set; }
-
-        public Train Train { get; set; }
-
-        public int TicketClass { get;set;}
-
-        public int Count { get; set; }
+        
     }
 }

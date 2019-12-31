@@ -103,10 +103,6 @@ namespace API.Controllers
 
             try
             {
-                if (!dbContext.Reviews.Any(p => p.Id == reviewId) || !dbContext.Users.Any(u => u.Id == userId))
-                {
-                    return BadRequest("Incorrect Data");
-                }
                 var res = new LikeDTO();
 
                 var reviewLike = await dbContext.ReviewLikes.FirstOrDefaultAsync(f => f.ReviewId == reviewId && f.UserId == userId);
@@ -122,7 +118,7 @@ namespace API.Controllers
                 }
 
                 dbContext.SaveChanges();
-                res.Count = dbContext.ReviewLikes.Count(r => r.ReviewId == reviewId);
+                //res.Count = dbContext.ReviewLikes.Count(r => r.ReviewId == reviewId);
 
                 return Json(res);
 
@@ -231,11 +227,6 @@ namespace API.Controllers
 
             try
             {
-                if(!dbContext.Comments.Any(c => c.Id == commentId) || !dbContext.Users.Any(u => u.Id == userId))
-                {
-                    return BadRequest("Invalid data");
-                }
-
                 var commentLike = await dbContext.CommentLikes.FirstOrDefaultAsync(c => c.CommentId == commentId && c.UserId == userId);
                 var res = new LikeDTO();
 
@@ -255,7 +246,7 @@ namespace API.Controllers
                 }
 
                 dbContext.SaveChanges();
-                res.Count = dbContext.CommentLikes.Count(c => c.CommentId == commentId);
+                //res.Count = dbContext.CommentLikes.Count(c => c.CommentId == commentId);
 
                 return Json(res);
             }

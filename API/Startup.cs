@@ -30,12 +30,14 @@ namespace API
 #if DEBUG
                     builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
 #else
-                    builder.WithOrigins("http://traveller-frontend.azurewebsites.net").AllowAnyHeader().AllowAnyMethod();
+                    //builder.WithOrigins("http://traveller-frontend.azurewebsites.net").AllowAnyHeader().AllowAnyMethod();
+                    builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
 #endif
-                    
+
                 });
             });
-            services.AddDbContext<AppDbContext>(options => options.UseMySql("server=remotemysql.com;database=xZJVeUZXF4;user=xZJVeUZXF4;password=KOk2jJScNl", b => b.MigrationsAssembly("API")));
+            services.AddDbContext<AppDbContext>(options => options.UseMySql("server=traveller-db.cxg6ocbiidbi.ap-southeast-2.rds.amazonaws.com;database=Traveller;user=admin;password=Qwerty1234", b => b.MigrationsAssembly("API")));
+            //services.AddDbContext<AppDbContext>(options => options.UseSqlServer("Server=traveller-database.cxg6ocbiidbi.ap-southeast-2.rds.amazonaws.com;Database=Traveller;User Id=admin;Password=Qwerty1234!;", b => b.MigrationsAssembly("API")));
 
             services.AddScoped<UserService>();
         }

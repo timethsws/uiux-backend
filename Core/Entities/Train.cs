@@ -4,11 +4,9 @@ namespace Core.Entities
 {
     public class Train
     {
-        public Guid TrainId { get; set; }
+        public Guid Id { get; set; }
         
-        public string TrainName { get; set; }
-
-        public string TrainCode { get; set; }
+        public string Name { get; set; }
 
         public DateTime DepartureTime { get; set; }
 
